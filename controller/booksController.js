@@ -32,75 +32,75 @@ exports.getById = async (req, res) => {
 };
 
 // // Add a Book
-// exports.addBook = async (req, res) => {
-//   const { name, author, description, price, available, image } = req.body;
+exports.addBook = async (req, res) => {
+  const { name, author, description, price, available, image } = req.body;
 
-//   const book = new Books({
-//     name,
-//     author,
-//     description,
-//     price,
-//     available,
-//     image,
-//   });
+  const book = new Books({
+    name,
+    author,
+    description,
+    price,
+    available,
+    image,
+  });
 
-//   await book
-//     .save()
-//     .then(() => {
-//       res.status(200).json({
-//         message: book,
-//       });
-//     })
-//     .catch(() => {
-//       res.status(404).json({
-//         message: "Unable to Add Book",
-//       });
-//     });
-// };
+  await book
+    .save()
+    .then(() => {
+      res.status(200).json({
+        message: book,
+      });
+    })
+    .catch(() => {
+      res.status(404).json({
+        message: "Unable to Add Book",
+      });
+    });
+};
 
 // // Update Book
-// exports.updateBook = async (req, res) => {
-//   const id = req.params.id;
+exports.updateBook = async (req, res) => {
+  const id = req.params.id;
 
-//   const { name, author, description, available, price, image } = req.body;
+  const { name, author, description, available, price, image } = req.body;
 
-//   let updateBook = await Books.findByIdAndUpdate(id, {
-//     name,
-//     author,
-//     description,
-//     price,
-//     available,
-//     image,
-//   });
+  let updateBook = await Books.findByIdAndUpdate(id, {
+    name,
+    author,
+    description,
+    price,
+    available,
+    image,
+  });
 
-//   // console.log(updateBook);
-//   await updateBook
-//     .save()
-//     .then(() => {
-//       res.status(200).json({
-//         message: updateBook,
-//       });
-//     })
-//     .catch(() => {
-//       res.status(404).json({
-//         message: "Book cannot be Update",
-//       });
-//     });
-// };
+  // console.log(updateBook);
+  await updateBook
+    .save()
+    .then(() => {
+      res.status(200).json({
+        message: updateBook,
+      });
+    })
+    .catch(() => {
+      res.status(404).json({
+        message: "Book cannot be Update",
+      });
+    });
+};
 
 // // Delete Book
 
-// exports.deleteBook = async (req, res) => {
-//   const id = req.params.id;
-//   let book;
-//   try {
-//     book = await Books.findByIdAndRemove(id);
-//     res.status(200).json({
-//       message: "Book Deleted Successfully",
-//     });
-//   } catch (error) {
-//     res.status(400).json({
-//       error,
-//     });
-//   }
-// };
+exports.deleteBook = async (req, res) => {
+  const id = req.params.id;
+  let book;
+  try {
+    book = await Books.findByIdAndRemove(id);
+    res.status(200).json({
+      message: "Book Deleted Successfully",
+    });
+  } catch (error) {
+    res.status(400).json({
+      error,
+    });
+  }
+};

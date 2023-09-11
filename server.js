@@ -4,18 +4,18 @@ require("dotenv").config()
 const app = express()
 const connectDB = require("./Database/dbConfig")
 const router = require("./routes/bookRoutes") 
-// const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 
 
   
 //Body parser
 app.use(express.json())
 
-// app.use(cookieParser());
+app.use(cookieParser());
 
 
 //Cross Origin 
-// app.use(cors())
+app.use(cors())
 
 //Database Connection
 connectDB()
