@@ -1,10 +1,10 @@
 const mongoose = require("mongoose")
 const MongoClient = require('mongodb').MongoClient;
 
-const url = process.env.MONGO_URI
+const uri = process.env.MONGO_URI
 const connectDB = async() =>{
     try {
-        mongoose.connect(url,{
+        mongoose.connect(uri,{
             useNewUrlParser:true,
             useUnifiedTopology:true
         }).then(con=>{
