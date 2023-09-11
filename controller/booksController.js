@@ -64,28 +64,33 @@ exports.updateBook = async (req, res) => {
 
   const { name, author, description, available, price, image } = req.body;
 
-  let updateBook = await Books.findByIdAndUpdate(id, {
-    name,
-    author,
-    description,
-    price,
-    available,
-    image,
-  });
-
-  // console.log(updateBook);
-  await updateBook
-    .save()
-    .then(() => {
-      res.status(200).json({
-        message: updateBook,
-      });
-    })
-    .catch(() => {
-      res.status(404).json({
-        message: "Book cannot be Update",
-      });
+  try {
+    const updatedBook = await Book.findByIdAndUpdate(id, {
+      name,
+      author,
+      description,
+      price,
+      available,
+      image,
     });
+
+    if (!updatedBook) {
+      return res.status(404).json({
+        message: "Book not found or cannot be updated.",
+      });
+    }
+
+    res.status(200).json({
+      message: "Book updated successfully.",
+      updatedBook,
+    });
+  } catch (error) {
+    console.error("Error updating book:", error);
+    res.status(500).json({
+      message: "An error occurred while updating the book.",
+      error: error.message,
+    });
+  }
 };
 
 // // Delete Book
@@ -95,6 +100,12 @@ exports.deleteBook = async (req, res) => {
   let book;
   try {
     book = await Books.findByIdAndRemove(id);
+
+    if (!book) {
+      return res.status(404).json({
+        message: "Book not found.",
+      });
+    }
     res.status(200).json({
       message: "Book Deleted Successfully",
     });
