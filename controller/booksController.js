@@ -17,19 +17,19 @@ exports.getAllBooks = async (req, res) => {
 
 // Get Single Book
 
-// exports.getById = async (req, res) => {
-//   const id = req.params.id;
-//   const book = await Books.findById(id);
-//   if (book) {
-//     res.status(200).json({
-//       book,
-//     });
-//   } else {
-//     res.status(404).json({
-//       message: "No Book Found",
-//     });
-//   }
-// };
+exports.getById = async (req, res) => {
+  const id = req.params.id;
+  const book = await Books.findById(id);
+  if (book) {
+    res.status(200).json({
+      book,
+    });
+  } else {
+    res.status(404).json({
+      message: "No Book Found",
+    });
+  }
+};
 
 // // Add a Book
 // exports.addBook = async (req, res) => {
